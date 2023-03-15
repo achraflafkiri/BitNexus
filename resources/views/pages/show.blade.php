@@ -18,24 +18,21 @@
                     <th scope="col">time</th>
                     <th scope="col">size</th>
                     <th scope="col">uploader</th>
-                    <th scope="col">Edit</th>
-                    <th scope="col">Delete</th>
+                    <th scope="col"></th>
                 </tr>
             </thead>
             <tbody>
-                <tr>
+                <tr class="">
                     <td>{{ $torrent->title }}</td>
-                    <td>{{ $torrent->time }}</td>
+                    <td>{{ $torrent->created_at }}</td>
                     <td>{{ $torrent->size }}</td>
                     <td>{{ $torrent->name }}</td>
-                    <td>
+                    <td class="d-flex">
                         <form action="/torrents/{{ $torrent->id }}/edit" method="POST">
                             @csrf
                             @method('PUT')
                             <button type="submit" class="btn btn-success">Edit</button>
                         </form>
-                    </td>
-                    <td>
                         <form action="/torrents/{{ $torrent->id }}" method="POST">
                             @csrf
                             @method('DELETE')

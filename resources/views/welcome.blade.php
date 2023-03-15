@@ -7,7 +7,7 @@
             <div class="row">
                 <form method="GET" action="/torrents" class="search d-flex input-group mb-3">
                     <input type="search" name="q" class="form-control" placeholder="search..." />
-                    <button type="submit">search</button>
+                    <button type="submit" class="btn btn-success">search</button>
                 </form>
             </div>
             <div class="row">
@@ -15,13 +15,12 @@
                     search engine!</p>
             </div>
             <div class="row cards">
+                <p class="small">This is the last thing that was uploaded to the site</p>
+                @foreach ($torrents as $torrent)
                 <ul class="list-group">
-                    <li class="list-group-item">An item</li>
-                    <li class="list-group-item">A second item</li>
-                    <li class="list-group-item">A third item</li>
-                    <li class="list-group-item">A fourth item</li>
-                    <li class="list-group-item">And a fifth one</li>
+                    <li class="list-group-item">{{ $torrent->title }}</li>
                 </ul>
+                @endforeach
             </div>
         </section>
     </section>

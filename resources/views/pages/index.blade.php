@@ -6,7 +6,7 @@
         <div class="row">
             <form method="GET" action="/torrents" class="search d-flex input-group mb-3">
                 <input type="search" name="q" class="form-control" placeholder="search..." />
-                <button type="submit">search</button>
+                <button type="submit" class="btn btn-success">search</button>
             </form>
         </div>
         <div class="col">

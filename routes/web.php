@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\torrentController;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -16,7 +17,11 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    $torrents = DB::table('torrents')
+    ->select('torrents.*')
+    ->orderBy("created_at", "desc")
+    ->get();
+    return view('welcome', ["torrents" => $torrents]);
 });
 
 Auth::routes();
