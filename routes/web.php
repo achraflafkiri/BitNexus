@@ -20,6 +20,7 @@ Route::get('/', function () {
     $torrents = DB::table('torrents')
     ->select('torrents.*')
     ->orderBy("created_at", "desc")
+    ->limit(3)
     ->get();
     return view('welcome', ["torrents" => $torrents]);
 });
