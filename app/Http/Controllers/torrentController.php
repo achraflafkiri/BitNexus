@@ -60,11 +60,11 @@ class torrentController extends Controller
             ->join('users', 'users.id', '=', 'torrents.user_id')
             ->select('torrents.*', 'users.name')
             ->where("torrents.id", '=', $torrent->id)
-            ->get();
+            ->first();
 
         // dd($torrentD);
         // return view('pages.show', ['torrent' => $torrentD]);
-        return view('pages.show', ['torrent' => $torrentD->first()]);
+        return view('pages.show', ['torrent' => $torrentD]);
     }
 
     public function edit(Torrent $torrent)
