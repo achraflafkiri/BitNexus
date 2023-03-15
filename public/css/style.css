@@ -1,0 +1,66 @@
+:root {
+    --main-color: #00EEA7;
+    --sec-color: #f3f3f3 ;
+    --text-color: #575757;
+    --bg-color: #D9008FC2;
+}
+
+body, html {
+    overflow-x: hidden;
+}
+
+.button {
+    margin-left: 14px;   
+    border-radius: 4px;
+    background-color: var(--sec-color);
+    color: var(--text-color);
+}
+
+.button-nav {
+    width: 88px;
+    height: 46px;
+}
+
+.button-success {
+    background: var(--main-color) !important;
+    background-color: var(--main-color)  !important;
+}
+
+.nav-link.success {
+    color: var(--sec-color) !important; 
+}
+
+
+
+.button-form {
+    width: 100%;
+height: 53px;
+}
+
+form {
+    height: fit-content;
+    padding: 10px 20px;
+}
+
+form.auth{
+    width: 700px;
+}
+
+.flex-center, .button-form, li.nav-item, .button, footer {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+section {
+    height: 90vh;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    margin: 2rem 0;
+    padding: 20px 0;
+}
+
+footer {
+    width: 100%;
+    height: 30px;
+}
