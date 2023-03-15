@@ -52,7 +52,19 @@ class torrentController extends Controller
 
     public function show(Torrent $torrent)
     {
-        return view('pages.show', ['torrent' => $torrent]);
+
+        // select t.* , u.name
+        // from torrents t inner join users u
+        // on t.user_id=u.id
+        $torrentD = DB::table("torrents")
+            ->join('users', 'users.id', '=', 'torrents.user_id')
+            ->select('torrents.*', 'users.name')
+            ->where("torrents.id", '=', $torrent->id)
+            ->get();
+
+        // dd($torrentD);
+        // return view('pages.show', ['torrent' => $torrentD]);
+        return view('pages.show', ['torrent' => $torrentD->first()]);
     }
 
     public function edit(Torrent $torrent)
