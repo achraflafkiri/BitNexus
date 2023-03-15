@@ -38,15 +38,25 @@ class torrentController extends Controller
 
     public function store(Request $request)
     {
-        $torr = new Torrent;
-        $torr->title = $request->input('title');
-        $torr->time = $request->input('time');
-        $torr->size = $request->input('size');
+        // Get the uploaded file
+        $file = $request->file('file');
+
+        // Generate a unique name for the file
+        $filename = time() . '_' . $file->getClientOriginalName();
+
+        // Move the file to the uploads directory
+        $file->move(public_path('uploads'), $filename);
 
         $user = Auth::user();
-        $torr->user_id = $user->id;
 
+        $torr = new Torrent;
+        $torr->file = $filename;
+        $torr->path = public_path('uploads') . '/' . $filename;
+        $torr->title = $request->input('title');
+        $torr->size = $request->input('size');
+        $torr->user_id = $user->id;
         $torr->save();
+
         return redirect('/torrents');
     }
 

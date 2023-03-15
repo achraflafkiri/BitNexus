@@ -13,4 +13,11 @@ class Torrent extends Model
     {
         return $this->belongsTo(User::class);
     }
+
+    protected $fillable = [
+        'file',
+        'path',
+        'title',
+        'size'
+    ];
 }

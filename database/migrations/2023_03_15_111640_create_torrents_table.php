@@ -13,8 +13,9 @@ return new class extends Migration
     {
         Schema::create('torrents', function (Blueprint $table) {
             $table->id();
+            $table->string("file");
+            $table->string("path");
             $table->string("title");
-            $table->string("time");
             $table->string("size");
             $table->unsignedBigInteger('user_id');
             $table->timestamps();

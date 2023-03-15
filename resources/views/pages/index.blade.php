@@ -25,7 +25,7 @@
                             <td>
                                 <a href="/torrents/{{ $torrent->id }}">{{ $torrent->title }}</a>
                             </td>
-                            <td>{{ $torrent->time }}</td>
+                            <td>{{ $torrent->created_at }}</td>
                             <td>{{ $torrent->size }}</td>
                             <td>{{ $torrent->name }}</td>
                         </tr>

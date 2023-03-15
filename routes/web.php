@@ -27,7 +27,7 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name
 
 Route::get('/torrents', [torrentController::class, 'index']);
 Route::get('/torrents/create', [torrentController::class, 'create']);
-Route::post('/torrents', [torrentController::class, 'store']);
+Route::post('/torrents/post', [torrentController::class, 'store']);
 Route::get('/torrents/{torrent}', [torrentController::class, 'show']);
 Route::get('/torrents/{torrent}/edit', [torrentController::class, 'edit']);
 Route::put('/torrents/{torrent}', [torrentController::class, 'update']);
