@@ -11,8 +11,8 @@
                     <p>Let's create new torrent file? <span class="text-info">Torrent</span></p>
                 </div>
                 <div class="mb-3">
-                    <label for="name" class="form-label">name</label>
-                    <input type="text" name="name" class="form-control" id="name">
+                    <label for="title" class="form-label">title</label>
+                    <input type="text" name="title" class="form-control" id="title">
                 </div>
                 <div class="mb-3">
                     <label for="time" class="form-label">time</label>
@@ -21,10 +21,6 @@
                 <div class="mb-3">
                     <label for="size" class="form-label">size</label>
                     <input type="text" name="size" class="form-control" id="size">
-                </div>
-                <div class="mb-3">
-                    <label for="uploader" class="form-label">uploader</label>
-                    <input type="text" name="uploader" class="form-control" id="uploader">
                 </div>
                 <button type="submit" class="button button-success text-white border-0 .p-2 button-form">Submit</button>
             </form>

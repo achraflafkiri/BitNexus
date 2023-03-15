@@ -13,21 +13,21 @@
             <table class="table">
                 <thead>
                     <tr>
-                        <th scope="col">name</th>
+                        <th scope="col">title</th>
                         <th scope="col">time</th>
                         <th scope="col">size</th>
-                        <th scope="col">uploader</th>
+                        <th scope="col">author</th>
                     </tr>
                 </thead>
                 <tbody>                    
                     @foreach ($torrents as $torrent)
                         <tr>
                             <td>
-                                <a href="/torrents/{{ $torrent->id }}">{{ $torrent->name }}</a>
+                                <a href="/torrents/{{ $torrent->id }}">{{ $torrent->title }}</a>
                             </td>
                             <td>{{ $torrent->time }}</td>
                             <td>{{ $torrent->size }}</td>
-                            <td>{{ $torrent->uploader }}</td>
+                            <td>{{ $torrent->name }}</td>
                         </tr>
                     @endforeach
                 </tbody>

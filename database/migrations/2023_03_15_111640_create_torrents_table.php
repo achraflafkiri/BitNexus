@@ -13,11 +13,15 @@ return new class extends Migration
     {
         Schema::create('torrents', function (Blueprint $table) {
             $table->id();
-            $table->string("name");
+            $table->string("title");
             $table->string("time");
             $table->string("size");
-            $table->string("uploader");
+            $table->unsignedBigInteger('user_id');
             $table->timestamps();
+            $table->foreign('user_id')
+                ->references('id')
+                ->on('users')
+                ->onDelete('cascade');
         });
     }
 

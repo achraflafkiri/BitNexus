@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Torrent;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 
 class torrentController extends Controller
@@ -12,14 +13,21 @@ class torrentController extends Controller
     {
         $q = $request->input('q');
 
+        // SELECT torrents.*, users.name 
+        // FROM torrents 
+        // INNER JOIN users ON users.id = torrents.user_id 
+        // WHERE name LIKE '%$q%'
         $torrents = DB::table('torrents')
-            ->where('name', 'like', "%$q%")
+            ->join('users', 'users.id', '=', 'torrents.user_id')
+            ->select('torrents.*', 'users.name')
+            ->where('title', 'like', "%$q%")
             ->get();
-        
-            if (!$torrents) {
-                $torrents = "";
-            }
-        
+
+        if (!$torrents) {
+            $torrents = "";
+        }
+
+        // dd($torrents);
         return view("pages.index", ['torrents' => $torrents]);
     }
 
@@ -31,10 +39,13 @@ class torrentController extends Controller
     public function store(Request $request)
     {
         $torr = new Torrent;
-        $torr->name = $request->input('name');
+        $torr->title = $request->input('title');
         $torr->time = $request->input('time');
         $torr->size = $request->input('size');
-        $torr->uploader = $request->input('uploader');
+
+        $user = Auth::user();
+        $torr->user_id = $user->id;
+
         $torr->save();
         return redirect('/torrents');
     }
@@ -51,14 +62,14 @@ class torrentController extends Controller
 
     public function update(Request $request, Torrent $torrent)
     {
-        $torrent->name = $request->input('name');
+        $torrent->title = $request->input('title');
         $torrent->time = $request->input('time');
         $torrent->size = $request->input('size');
         $torrent->uploader = $request->input('uploader');
         $torrent->save();
         return redirect('/');
     }
-    
+
 
     public function destroy(Torrent $torrent)
     {
