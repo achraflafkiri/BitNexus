@@ -30,6 +30,9 @@ Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
+Route::get("/blog", function() {
+    return view('blog');
+});
 
 // Torrents
 Route::get('/torrents', [torrentController::class, 'index']);
