@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Exceptions\AppError;
 use App\Models\Torrent;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -38,6 +39,16 @@ class torrentController extends Controller
 
     public function store(Request $request)
     {
+        // Get the authenticated user
+        $user = Auth::user();
+
+        // Validate the incoming request data
+        $validatedData = $request->validate([
+            'file' => 'required|mimetypes:application/x-bittorrent,application/zip',
+            'title' => "required|string",
+            'size' => "required|string",
+        ]);
+
         // Get the uploaded file
         $file = $request->file('file');
 
@@ -47,16 +58,26 @@ class torrentController extends Controller
         // Move the file to the uploads directory
         $file->move(public_path('uploads'), $filename);
 
-        $user = Auth::user();
+        // Extract the field values from the request
+        $title = $request->input("title");
+        $size = $request->input("size");
+        $user_id_ = $user->id;
 
+        // Throw an error if any of the required fields are missing
+        if (!$title || !$size || !$user_id_) {
+            throw new AppError('All fields are required', 422);
+        }
+
+        // Create a new Torrent model and save it to the database
         $torr = new Torrent;
         $torr->file = $filename;
         $torr->path = public_path('uploads') . '/' . $filename;
-        $torr->title = $request->input('title');
-        $torr->size = $request->input('size');
-        $torr->user_id = $user->id;
+        $torr->title = $title;
+        $torr->size = $size;
+        $torr->user_id = $user_id_;
         $torr->save();
 
+        // Redirect to the torrents page
         return redirect('/torrents');
     }
 
